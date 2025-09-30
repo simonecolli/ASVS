@@ -1,0 +1,11 @@
+.DS_Store
+**/bin/**
+**/tmp/**
+**/.vscode/**
+
+# VScode
+.vscode
+.vscode/*
+*/.vscode
+*/.vscode/*%%
+.history/
