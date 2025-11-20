@@ -547,5 +547,62 @@ Una funzione che preserva i join o i meet è monotona, ma una funzione che
 \end{nota}
 
 \subsection{Chains}
+\begin{definizione}{Catena}{chain}
+Dato un poset $\langle X, \sqsubseteq \rangle$, una catena (chain) $S$ se
+tutti gli elementi contenuti sono completamente ordinati, ovvero:
+\[
+\forall x,y \in S . x \sqsubseteq y \vee y \sqsubseteq x
+\]
+\end{definizione}
+
+\begin{esempio}{Esempio di catena}{chain_example}
+    Dato un poset $\langle \mathcal{P}(\mathbb{Z}), \subseteq \rangle$ con
+    reticolo rappresentato nell'immagine sottostante (\ref{fig:th_02_07}),
+    esempi di catene sono:
+    \begin{itemize}
+        \item $\{\emptyset\}$
+        \item $\{\emptyset, \{0, 1\}\}$
+        \item $\{\{0\}, \{-1, 0, 1\}\}$
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/th_02/07.png}
+        \caption{L'immagine illustra un reticolo su $\mathcal{P}(\mathbb{Z})$.}
+        \label{fig:th_02_07}
+    \end{figure}
+\end{esempio}
+
+\subsubsection{Ascending Chain Condition (ACC)}
+
+\begin{definizione}{Catena Ascendente}{ascending_chain}
+Una catena ascendente è una sequenza di elementi $(l_n)_{n \in \mathbb{N}}$
+indicizzata dai numeri naturali tali che:
+\[
+i \le j \implies l_i \sqsubseteq l_j
+\]
+Ovvero $l_0 \sqsubseteq l_1 \sqsubseteq l_2 \sqsubseteq \dots$.
+\end{definizione}
+
+\begin{definizione}{Ascending Chain Condition (ACC)}{acc}
+Un poset soddisfa la Ascending Chain Condition (ACC) se ogni catena ascendente
+infinita si stabilizza (non è strettamente crescente per sempre).
+
+Matematicamente, una catena $(l_n)$ si stabilizza se:
+\[
+\exists k \ge 0 . \forall j \ge k . l_k = l_j
+\]
+Questo significa che, dopo un certo indice $k$, tutti gli elementi successivi
+sono uguali a $l_k$ (il punto fisso della sequenza).
+\end{definizione}
+
+\begin{esempio}{Esempio di catena ascentente infinita non è stettamente crescente}{}
+Un esempio di catena ascentente infinita non stettamente crescente è la seguente:
+\[
+ \exists k \ge 0 . \forall j \ge k . l_k = l_j
+\]
+Perché dopo un certo numero di passi $k$, tutti gli elementi successivi
+della catena sono uguali a $l_k$. Ovvero la catena si stabilizza.
+\end{esempio}
 
 \subsection{Fixpoint}
