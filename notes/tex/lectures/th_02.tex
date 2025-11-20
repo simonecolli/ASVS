@@ -441,7 +441,7 @@ fondamentali per rioscire a modellare gli stati di un programma.
 
 \begin{definizione}{Funzione}{function}
 
-    Una funzione $f$ tra due insiemi $X$ e $Y$ è un particolare tipo di
+Una funzione $f$ tra due insiemi $X$ e $Y$ è un particolare tipo di
 relazione $R \subseteq X \times Y$ che soddisfa la proprietà di
 unicità dell'immagine.
 
@@ -604,5 +604,27 @@ Un esempio di catena ascentente infinita non stettamente crescente è la seguent
 Perché dopo un certo numero di passi $k$, tutti gli elementi successivi
 della catena sono uguali a $l_k$. Ovvero la catena si stabilizza.
 \end{esempio}
+
+\subsection{Mappe continue}
+
+\begin{definizione}{Mappa continua}{def:continuous_map}
+
+Dati due reticoli (o poset) $\langle X, \sqsubseteq_X, \sqcup_X, \sqcap_X \rangle$ e
+$\langle Y, \sqsubseteq_Y, \sqcup_Y, \sqcap_Y \rangle$ e una funzione
+$f: X \to Y$ (\Cref{def:function}), essa è detta continua se per ogni catena
+$C \subseteq X$ (\Cref{def:chain}) tale che $\bigsqcup_X C$ esiste, valgono
+le seguenti condizioni:
+\begin{itemize}
+    \item $\bigsqcup_Y f(C)$ esiste;
+    \item $f(\bigsqcup_X C) = \bigsqcup_Y f(C)$.
+\end{itemize}
+
+\end{definizione}
+
+\begin{nota}{Utilità delle mappe continue}{nota:continuous_map_usefulness}
+Le mappe continue sono fondamentali nell'analisi statica perché permettono di
+applicare il Teorema di Kleene per calcolare i punti fissi (fixpoints)
+tramite iterazione.
+\end{nota}
 
 \subsection{Fixpoint}
