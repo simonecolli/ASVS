@@ -4,7 +4,7 @@ Per poter discutere in modo rigoroso di tecniche di verifica del software,
 teoria della computazione e alla logica formale.
 
 \subsection{Set notation}
-\begin{definizione}{Insieme}{def:set}
+\begin{definizione}{Insieme}{set}
 Un insieme (set) è una collezione di oggetti ben definiti e distinti.
 La collezione stessa è considerata un oggetto a sé stante.
 
@@ -26,7 +26,7 @@ Dato un insieme $S$ è possibile dire che:
 
 \subsection{Partial order}
 
-\begin{definizione}{Ordine parziale}{def:partial_order}
+\begin{definizione}{Ordine parziale}{partial_order}
 
 Un ordine parziale (partial order) è una relazione binaria $\sqsubseteq$ su un
 insieme $X$ che soddisfa le seguenti proprietà:
@@ -61,7 +61,7 @@ ordine parziale. In questo caso è possibile verificare che:
 
 \subsection{Powerset}
 
-\begin{definizione}{Insieme delle parti}{def:powerset}
+\begin{definizione}{Insieme delle parti}{powerset}
 
 Dato un insieme $S$, definito in \Cref{def:set}, l'insieme delle parti
 (powerset) di $S$ è l'insieme di tutti i sottoinsiemi di $S$, ed è indicato
@@ -99,7 +99,7 @@ esso e verificare che esso soddisfa le proprietà di un ordine parziale:
 \end{itemize}
 
 
-\begin{esercizio}{Inclusione inversa su powerset}{es:inverse_powerset_order}
+\begin{esercizio}{Inclusione inversa su powerset}{inverse_powerset_order}
 
 L'inclusione inversa su un powerset $\mathcal{P}(X)$ è un ordine parziale?
 Per verificare se $\supseteq$ è un ordine parziale su $\mathcal{P}(X)$,
@@ -156,7 +156,7 @@ un elemento $x$ è posizionato più in alto di un elemento $y$ se $x$ è
 
 \subsection{Upper e lower bounds}
 
-\begin{definizione}{Upper bound and least upper bound}{def:upper_bound}
+\begin{definizione}{Upper bound and least upper bound}{upper_bound}
 
 Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 è possibile dire che:
@@ -170,7 +170,7 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 
 \end{definizione}
 
-\begin{definizione}{Lower bound e greatest lower bound}{def:lower_bound}
+\begin{definizione}{Lower bound e greatest lower bound}{lower_bound}
 
 Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 è possibile dire che:
@@ -184,7 +184,7 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 
 \end{definizione}
 
-\begin{esercizio}{Lub e glb su powerset}{exr:lub_glb_powerset}
+\begin{esercizio}{Lub e glb su powerset}{lub_glb_powerset}
 Dato il Poset $\langle \mathcal{P}(X), \subseteq \rangle$, e siano $S_{1},S_{2}\in \mathcal{P}(X)$:
 \begin{enumerate}
     \item $S_{1}\cup S_{2}$ è l'estremo superiore (lub) di $\{S_{1},S_{2}\}$?
@@ -211,7 +211,7 @@ $S_{1}\cap S_{2}$ è l'estremo inferiore (glb) di $\{S_{1},S_{2}\}$?
 \end{esercizio}
 \subsection{Supremum e Infimum}
 
-\begin{definizione}{Supremum}{def:supremum}
+\begin{definizione}{Supremum}{supremum}
 
 Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $S \subseteq X$
 il supremum (o least upper bound) di $S$ è l'elemento più piccolo tra tutti gli
@@ -219,7 +219,7 @@ upper bound di $S$.
 
 \end{definizione}
 
-\begin{definizione}{Infimum}{def:infimum}
+\begin{definizione}{Infimum}{infimum}
 
 Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $S \subseteq X$
 l'infimum (o greatest lower bound) di $S$ è l'elemento più grande tra tutti i
@@ -240,7 +240,7 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ è possibile definire:
 \end{proposizione}
 \subsection{Lattice}
 
-\begin{definizione}{Lattice}{def:lattice}
+\begin{definizione}{Lattice}{lattice}
 Dato un poset $\langle X, \sqsubseteq \rangle$, esso è un reticolo (lattice) se
 soddisfa entrambe le seguenti proprietà:
 
@@ -306,7 +306,7 @@ elementi $x,y \in X$, ovvero $x \sqsubseteq y$ se e solo se:
 
 \subsection{Set lattice}
 
-\begin{definizione}{Set lattice}{def:set_lattice}
+\begin{definizione}{Set lattice}{set_lattice}
 Le operazioni insiemistiche definiscono una struttura di reticolo.
 Dato il poset $\langle \mathcal{P}(X), \subseteq \rangle$, esso forma un
 reticolo rispetto alle operazioni di unione ($\cup$) e intersezione
@@ -319,14 +319,14 @@ Se l'insieme $X$ è finito, allora il reticolo ha altezza finita.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/th_02/02.png}
+    \includegraphics[width=0.4\textwidth]{images/th_02/02.png}
     \caption{L'immagine illustra un esempio di reticolo su un poset finito.}
     \label{fig:th_02_02}
 \end{figure}
 
 \end{definizione}
 
-\begin{nota}{Top e Bottom nei reticoli}{nota:set_lattice_top_bot}
+\begin{nota}{Top e Bottom nei reticoli}{set_lattice_top_bot}
 Un reticolo non possiede necessariamente un elemento Top ($\top$) o
 un elemento Bottom ($\bot$).
 Ad esempio, il reticolo $\langle \mathbb{Z}, \leq, \max, \min \rangle$ non
@@ -345,7 +345,7 @@ interi è illimitato in entrambe le direzioni.
 
 \subsection{Complete lattice}
 
-\begin{definizione}{Complete lattice}{def:complete_lattice}
+\begin{definizione}{Complete lattice}{complete_lattice}
 
 Un reticolo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ è detto completo se:
 \begin{itemize}
@@ -381,13 +381,13 @@ diventa un reticolo completo, poiché ora esistono sia un elemento top
 
 \end{esempio}
 
-\begin{proposizione}{Proprietà di un reticolo completo}{def:complete_lattice_properties}
+\begin{proposizione}{Proprietà di un reticolo completo}{complete_lattice_properties}
 
 Un reticolo completo possiede le seguenti proprietà:
 \begin{itemize}
     \item reticolo completo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ ha un
     elemento top $\top$ e un elemento bottom $\bot$ e si denota come
-    \[\langle X, \sqsubseteq, \top, \bot, \sqcup, \sqcap, \rangle\]
+    \[\langle X, \sqsubseteq, \top, \bot, \sqcup, \sqcap \rangle\]
     \item I reticoli finiti sono completi.
     \item $\sqcup$ induce $\sqcap : \sqcap S = \sqcup \{y | \forall x \in S . y \sqsubseteq x\}$
     \item $\sqcap$ induce $\sqcup : \sqcup S = \sqcap \{y | \forall x \in S . x \sqsubseteq y\}$
@@ -395,8 +395,157 @@ Un reticolo completo possiede le seguenti proprietà:
 
 \end{proposizione}
 
-\section{Relations}
-\section{Funcions (or maps)}
+\subsection{Relations}
 
-\section{Chains}
-\section{Fixpoint}
+\begin{definizione}{Prodotto cartesiano}{cartesian_product}
+Dati due insiemi(\Cref{def:set}) $X$ e $Y$, il loro prodotto cartesiano $X \times Y$ è
+l'insieme di tutte le possibili coppie ordinate $(x, y)$ dove il primo
+elemento appartiene a $X$ e il secondo a $Y$ .
+\[
+X \times Y = \{ (x, y) \mid x \in X \land y \in Y \}
+\]
+\end{definizione}
+
+\begin{definizione}{Relazione}{relation}
+Una relazione $R$ tra due insiemi $X$ e $Y$ è definita come un sottoinsieme
+del loro prodotto cartesiano (\Cref{def:cartesian_product}):
+\[
+R \subseteq X \times Y
+\]
+\end{definizione}
+
+\begin{nota}{Notazione per le relazioni}{nota:relation_notation}
+Dato una relazione $R \subseteq X \times Y$, è possibile indicare che
+un elemento $x \in X$ è in relazione con un elemento $y \in Y$ tramite due
+notazioni:
+\begin{itemize}
+    \item $(x, y) \in R$, ovvero tramite relazione insiemistica.
+    \item $x \; R \; y$, ovvero tramite notazione infissa.
+\end{itemize}
+
+\end{nota}
+
+\begin{nota}{Ordine parziale come relazione}{nota:partial_order_as_relation}
+Un ordine parziale $\sqsubseteq$ (\Cref{def:partial_order}) è un caso
+particolare di relazione definita sullo stesso insieme $X$.
+Formalmente, $\sqsubseteq$ è un sottoinsieme del prodotto cartesiano
+$X \times X$ ($\sqsubseteq \subseteq X \times X$).
+A differenza di una relazione generica, l'ordine parziale deve soddisfare le
+proprietà di riflessività, anti-simmetria e transitività (\Cref{def:partial_order}).
+\end{nota}
+
+\subsection{Functions (or maps)}
+
+Le funzioni (functions), sono un tipo particolare di relazione, e sono
+fondamentali per rioscire a modellare gli stati di un programma.
+
+\begin{definizione}{Funzione}{function}
+
+    Una funzione $f$ tra due insiemi $X$ e $Y$ è un particolare tipo di
+relazione $R \subseteq X \times Y$ che soddisfa la proprietà di
+unicità dell'immagine.
+
+Formalmente, per ogni elemento $x$ nel dominio, esiste al massimo un
+elemento $y$ nel codominio tale che $(x,y) \in f$:
+\[
+\forall (x, y) \in f, \nexists (x', y') \in f . (x = x' \land y \neq y')
+\]
+Una funzione è definita al massimo una volta su un dato input.
+\end{definizione}
+
+\begin{esempio}{Cerchio su un piano cartesiano}{es:circle_not_function}
+
+    Un cerchio su un piano cartesiano non rappresenta una funzione, poiché
+    un singolo valore di $x$ può essere associato a due valori distinti di
+    $y$ (uno sopra l'asse $x$ e uno sotto). Questo viola la proprietà di
+    unicità dell'immagine definita per le funzioni.
+
+\end{esempio}
+
+\begin{nota}{Non tutte le relazioni sono funzioni}{nota:rel_vs_func}
+Un ordine parziale (\Cref{def:partial_order}) non è generalmente una funzione,
+poiché un elemento può essere minore o uguale a molti altri elementi
+(uno-a-molti).
+\end{nota}
+
+
+\begin{definizione}{Notazione delle funzioni}{func_notation}
+Dato $f: X \to Y$, dove $X$ è il dominio e $Y$ è il codominio:
+\begin{itemize}
+    \item Notazione estensionale: Una funzione definita su punti specifici si scrive come:
+    \[ f = [x_0 \mapsto y_0, x_1 \mapsto y_1, \dots, x_n \mapsto y_n] \]
+    che è equivalente all'insieme di coppie $\{(x_0, y_0), (x_1, y_1), \dots, (x_n, y_n)\}$.
+    
+    \item Lambda notazione: Si utilizza $\lambda x . \textit{espressione}$ per
+    definire una funzione anonima. Ad esempio $\lambda x . f(x) \equiv f$.
+\end{itemize}
+\end{definizione}
+
+\subsubsection{Monotonia, Embedding e Isomorfismo}
+
+Dati due posets $\langle X, \sqsubseteq_X \rangle$ e $\langle Y, \sqsubseteq_Y \rangle$,
+e una funzione $f: X \to Y$, è possibile dire che:
+\begin{itemize}
+    \item La funzione $f$ è monotona se $x_1 \sqsubseteq_X x_2 \Rightarrow f(x_1) \sqsubseteq_Y f(x_2)$.
+    \item La funzione $f$ è un embedding ordinato se $x_1 \sqsubseteq_X x_2 \iff f(x_1) \sqsubseteq_Y f(x_2)$.
+    \item La funzione $f$ è un isomorfa se è un embedding ordinato ed è
+    suriettiva, ovvero: $\forall y \in Y, \exists x \in X . f(x) = y$.
+\end{itemize}
+
+\begin{esempio}{Esempio di funzione monotona, embedding ordinato e suriettiva}{}
+    Data $f: \langle \mathbb{Z}, \le \rangle \to \langle \mathbb{Z}, \le \rangle$,
+    definita come $f(x) = x + 1$, è possibile osservare che:
+    \begin{itemize}
+        \item La funzione è monotona.
+        \item La funzione è un embedding ordinato.
+        \item La funzione è suriettiva.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/th_02/05.png}
+        \caption{L'immagine illustra la funzione $f(x) = x + 1$ come
+        monotona, embedding ordinato e suriettiva.}
+        \label{fig:th_02_05}
+    \end{figure}
+\end{esempio}
+
+
+\begin{esempio}{Esempio di funzione monotona ma che non è un embedding}{}
+    Data $f: \langle \mathcal{P}(\mathbb{Z}), \subseteq \rangle \to \langle \mathbb{Z}, \le \rangle$,
+    definita come $f(X) = \max(X)$, è possibile osservare che:
+    \begin{itemize}
+        \item La funzione è monotona.
+        \item La funzione non è un embedding.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/th_02/06.png}
+        \caption{L'immagine illustra la funzione $f(X) = \max(X)$ come
+        monotona ma non un embedding.}
+        \label{fig:th_02_06}
+    \end{figure}
+\end{esempio}
+
+
+\subsubsection{Funzioni che preservano join e meet}
+
+Dati due reticoli $\langle X, \sqsubseteq_X, \sqcup_X, \sqcap_X \rangle$ e
+$\langle Y, \sqsubseteq_Y, \sqcup_Y, \sqcap_Y \rangle$, e una funzione
+$f: X \to Y$, è possibile dire che:
+\begin{itemize}
+    \item La funzione $f$ preserva i join se $f(x_1 \sqcup_X x_2) =
+    f(x_1) \sqcup_Y f(x_2)$.
+    \item La funzione $f$ preserva i meet se $f(x_1 \sqcap_X x_2) =
+    f(x_1) \sqcap_Y f(x_2)$.
+\end{itemize}
+
+\begin{nota}{Mantenimento della Monotonia}{nota:monotonicity_preservation}
+Una funzione che preserva i join o i meet è monotona, ma una funzione che
+è monotona non necessariamente preserva i join o i meet.
+\end{nota}
+
+\subsection{Chains}
+
+\subsection{Fixpoint}
