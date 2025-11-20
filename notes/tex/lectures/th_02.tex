@@ -14,10 +14,10 @@ Dato un insieme $S$ è possibile dire che:
     \item $S_{1}\subseteq S_{2}\triangleq\forall s\in S_{1}\Rightarrow s\in S_{2}$
     significa che l'insieme $S_{1}$ è un sottoinsieme di $S_{2}$ se ogni
     elemento di $S_{1}$ appartiene anche a $S_{2}$.
-    \item $S_{1}\cup S_{2}=\{s|s\in S_{1}\vee s\in S_{2}\}$ è l'unione di
+    \item $S_{1}\cup S_{2}=\{s \mid s\in S_{1}\vee s\in S_{2}\}$ è l'unione di
     due insiemi, ovvero l'insieme di tutti gli elementi che appartengono
     ad almeno uno dei due insiemi.
-    \item $S_{1}\cap S_{2}=\{s|s\in S_{1}\wedge s\in S_{2}\}$ è l'intersezione
+    \item $S_{1}\cap S_{2}=\{s \mid s\in S_{1}\wedge s\in S_{2}\}$ è l'intersezione
     di due insiemi, ovvero l'insieme di tutti gli elementi che appartengono
     ad entrambi gli insiemi.
 \end{itemize}
@@ -389,8 +389,8 @@ Un reticolo completo possiede le seguenti proprietà:
     elemento top $\top$ e un elemento bottom $\bot$ e si denota come
     \[\langle X, \sqsubseteq, \top, \bot, \sqcup, \sqcap \rangle\]
     \item I reticoli finiti sono completi.
-    \item $\sqcup$ induce $\sqcap : \sqcap S = \sqcup \{y | \forall x \in S . y \sqsubseteq x\}$
-    \item $\sqcap$ induce $\sqcup : \sqcup S = \sqcap \{y | \forall x \in S . x \sqsubseteq y\}$
+    \item $\sqcup$ induce $\sqcap : \sqcap S = \sqcup \{y \mid \forall x \in S . y \sqsubseteq x\}$
+    \item $\sqcap$ induce $\sqcup : \sqcup S = \sqcap \{y \mid \forall x \in S . x \sqsubseteq y\}$
 \end{itemize}
 
 \end{proposizione}
@@ -483,6 +483,7 @@ Dato $f: X \to Y$, dove $X$ è il dominio e $Y$ è il codominio:
 
 \subsubsection{Monotonia, Embedding e Isomorfismo}
 
+\begin{definizione}{Funzioni monotone, embedding ordinato e isomorfe}{monotonicity_embedding_isomorphism}
 Dati due posets $\langle X, \sqsubseteq_X \rangle$ e $\langle Y, \sqsubseteq_Y \rangle$,
 e una funzione $f: X \to Y$, è possibile dire che:
 \begin{itemize}
@@ -491,6 +492,7 @@ e una funzione $f: X \to Y$, è possibile dire che:
     \item La funzione $f$ è un isomorfa se è un embedding ordinato ed è
     suriettiva, ovvero: $\forall y \in Y, \exists x \in X . f(x) = y$.
 \end{itemize}
+\end{definizione}
 
 \begin{esempio}{Esempio di funzione monotona, embedding ordinato e suriettiva}{}
     Data $f: \langle \mathbb{Z}, \le \rangle \to \langle \mathbb{Z}, \le \rangle$,
@@ -628,3 +630,103 @@ tramite iterazione.
 \end{nota}
 
 \subsection{Fixpoint}
+
+
+L'analisi statica riduce spesso il problema della verifica di un programm
+alla ricerca della soluzione di un sistema di equazioni ricorsive.
+La soluzione di tali equazioni corrisponde al concetto matematico di punto
+fisso.
+
+\begin{definizione}{Punto Fisso}{fixpoint}
+Dato un insieme $X$ e una funzione $f: X \to X$:
+\begin{itemize}
+    \item Un elemento $x \in X$ è un punto fisso di $f$ se $f(x) = x$.
+    \item L'insieme di tutti i punti fissi di $f$ è denotato come
+    $Fix(f) = \{ x \mid f(x) = x \}$.
+\end{itemize}
+\end{definizione}
+
+In un poset $\langle X, \sqsubseteq \rangle$, sono interessanti due tipi
+particolari di punti fissi:
+\begin{itemize}
+    \item Least Fixpoint (lfp), ovvero il punto fisso più piccolo.
+    \[ \forall y \in Fix(f) . x \sqsubseteq y \]
+    \item Greatest Fixpoint (gfp), ovvero il punto fisso più grande.
+    \[ \forall y \in Fix(f) . x \sqsupseteq y \]
+\end{itemize}
+
+\subsubsection{Iterazioni di una funzione}
+
+Per calcolare un punto fisso, spesso si ricorre all'applicazione ripetuta
+della funzione.
+
+\begin{definizione}{Iterazioni}{iterations}
+Le iterate di una funzione $f: X \to X$ a partire da un elemento $x$ sono
+definite per induzione come:
+\begin{itemize}
+    \item $f^0(x) = x$
+    \item $f^{n+1}(x) = f(f^n(x))$
+\end{itemize}
+\end{definizione}
+
+\begin{nota}{Stabilizzazione}{stabilization}
+Se l'insieme $X$ è finito, la sequenza delle iterazioni $f^0, f^1, \dots$ deve
+necessariamente stabilizzarsi (raggiungere un punto fisso o entrare in un
+ciclo) in al massimo $|X|$ passi. Formalmente:
+\[
+\forall k \ge |X| . \exists n < |X| . f^k(x) = f^n(x)
+\]
+Se $X$ è infinito, la sequenza potrebbe non terminare mai.
+\end{nota}
+
+\subsection{Teoremi di Punto Fisso}
+
+Esistono due teoremi principali che garantiscono l'esistenza (e talvolta la
+costruttibilità) dei punti fissi.
+La scelta del teorema dipende dalle proprietà della funzione $f$
+(\Cref{def:monotonicity_embedding_isomorphism})
+
+\begin{teorema}{Teorema di Knaster-Tarski}{knaster_tarski}
+
+    Sia $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ un reticolo e sia
+$f: X \to X$ una funzione monotona.
+Allora:
+\begin{enumerate}
+    \item $\langle Fix(f), \sqsubseteq, \sqcup, \sqcap \rangle$ è un reticolo
+    completo.
+    \item Il least fixpoint (lfp) è dato dal meet di tutti i ``post-fixpoints'',
+    ovvero $lfp(f) = \sqcap \{ l \mid l \sqsupseteq f(l) \}$
+    \item Il greatest fixpoint (gfp) è dato dal join di tutti i
+    ``pre-fixpoints'', ovvero $ gfp(f) = \bigsqcup \{ l \mid l \sqsubseteq
+    f(l) \} $
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/th_02/08.png}
+    \caption{L'immagine illustra un esempio grafico del Teorema di Knaster-Tarski.}
+    \label{fig:th_02_08}
+\end{figure}
+
+\end{teorema}
+
+\begin{teorema}{Teorema di Kleene}{kleene}
+Sia $\langle X, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle$ un reticolo
+completo e sia $f: X \to X$ una funzione continua (\Cref{def:monotonicity_embedding_isomorphism}).
+Allora $f$ ha un least fixpoint che può essere calcolato costruttivamente
+come il limite della catena ascendente che parte dal bottom ($\bot$):
+\[ lfp(f) = \bigsqcup_{n \ge 0} f^n(\bot) \]
+\end{teorema}
+
+\begin{nota}{Confronto tra i Teoremi}{nota:tarski_vs_kleene}
+
+I due teoremi di punto fisso presentano differenze chiave:
+\begin{itemize}
+    \item Knaster-Tarski: Richiede solo la monotonia. Questo teorema è più
+    generale ma non fornisce un algoritmo costruttivo (dice solo ``esiste ed
+    è uguale all'intersezione di \ldots'').
+    \item Kleene: Richiede la continuità (condizione più forte). Questo
+    teorema fornisce un algoritmo iterativo ($f(\bot), f(f(\bot)), \dots$)
+    per calcolare il risultato.
+\end{itemize}
+
+\end{nota}
