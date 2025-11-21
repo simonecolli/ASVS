@@ -1,0 +1,275 @@
+\section{Analisi dataflow}
+
+\subsection{CFGs}
+Nelle analisi di tipo dataflow i programmi vengono rappresentati come
+control flow graph (CFG), dove i nodi rappresentano gli statement del
+programma e gli archi rappresentano i possibili flussi di controllo tra di
+essi.
+
+\begin{esempio}{CFG di un programma semplice}{cfg_example}
+
+Consideriamo il seguente programma:
+\begin{verbatim}
+1 y = a - b ;
+2 x = y + b ;
+3 while ( y > a + b )
+4   y = y - x * x;
+\end{verbatim}
+
+La sua rappresentazione come CFG è la seguente:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/th_04/01.png}
+  \caption{L'immagine illustra il CFG del programma di esempio.}
+  \label{fig:th_04_01}
+\end{figure}
+
+\end{esempio}
+
+\begin{definizione}{Struttura di un CFG}{cfg_structure}
+Dato un programma $P$, il suo control flow graph (CFG) è formato da:
+\begin{itemize}
+    \item Un insieme di nodi (blocchi) identificati da $i \in \mathbb{N}$
+    \item Un insieme di archi rappresentati come coppie $(i_1, i_2)
+    \in \mathbb{N} \times \mathbb{N}$ dove $i_1, i_2$ sono nodi del CFG.
+\end{itemize}
+Dato un CFG, è possibile definire:
+\begin{itemize}
+    \item $nodes(G)$ come l'insieme di tutti gli indici dei blocchi in $G$.
+    \item $stmt (G, i)$ lo statement associato al blocco $i$ in $G$.
+    \item $edges(G) \subseteq \mathbb{N} \times \mathbb{N}$ come l'insieme di
+    tutti gli archi in $G$.
+\end{itemize}
+\end{definizione}
+
+\subsection{Analisi di dataflow}
+
+Le analisi di dataflow sono tecniche tradizionali utilizzate principalmente
+per le ottimizzazioni nei compilatori.
+Queste analisi si basano sulla rappresentazione del programma tramite
+CFG e utilizzano un approccio formale basato su sistemi di equazioni.
+
+Le equazioni vengono costruite definendo le relazioni
+tra gli stati entranti (\textit{entry}) e uscenti (\textit{exit}) di ogni
+blocco del CFG.
+
+\begin{nota}{Scopo dell'analisi}{scopo_df}
+La proprietà di interesse è solitamente semplice e orientata a ottimizzare
+l'esecuzione a runtime (ad esempio, evitando di calcolare due volte la stessa
+espressione).
+\end{nota}
+
+\begin{nota}{Classificazione delle analisi di dataflow}{types_of_df}
+Le analisi dataflow classiche possono essere classificate secondo due
+criteri principali:
+\begin{itemize}
+    \item \textbf{Direzione del flusso}: indica se l'analisi procede
+    seguendo il flusso di controllo del programma (\textbf{forward}) o
+    contro di esso (\textbf{backward}).
+    \item \textbf{Semantica della proprietà}: indica se l'analisi
+    determina ciò che \textbf{può} accadere (\textbf{may/possible}) o ciò che
+    \textbf{deve} accadere (\textbf{must/definite}).
+\end{itemize}
+
+Il tipo di classificazione determina importanti aspetti formali:
+
+\begin{itemize}
+    \item \textbf{Forward vs Backward}:
+    \begin{itemize}
+        \item Forward: $entry(i)$ dipende da $exit(j)$ dei predecessori
+        \item Backward: $exit(i)$ dipende da $entry(j)$ dei successori
+    \end{itemize}
+    
+    \item \textbf{May vs Must}:
+    \begin{itemize}
+        \item May (possible): si utilizza l'unione ($\cup$) al join point
+        (basta che la proprietà valga lungo \emph{un} cammino)
+        \item Must (definite): si utilizza l'intersezione ($\cap$) al join point
+        (la proprietà deve valere lungo \emph{tutti} i cammini)
+    \end{itemize}
+\end{itemize}
+
+Queste caratteristiche determinano la struttura del reticolo e l'operatore
+di join utilizzato nell'analisi.
+
+\end{nota}
+
+\subsubsection{Available expressions}
+
+\begin{definizione}{Available expressions}{available_expressions}
+``For each program point, which expressions must have already
+been computed, and not later modified, on all paths to the program
+point''
+
+Formalmente un'espressione $e$ è disponibile in un punto del programma $p$ se
+e solo se $e$ è stata calcolata lungo ogni cammino che porta a $p$ e nessuna
+delle variabili che occorrono in $e$ è stata ridefinita dopo il calcolo di $e$.
+\end{definizione}
+
+\begin{nota}{Obiettivi dell'analisi}{ae_objectives}
+Quest'analisi è un'analisi \textbf{forward} e \textbf{must} che ha come
+obiettivi principali:
+\begin{itemize}
+    \item Eliminazione di sottoespressioni comuni (Common Subexpression
+    Elimination): evitare di ricalcolare espressioni il cui valore è già
+    disponibile.
+    \item Allocazione ottimale dei registri: memorizzare le espressioni più
+    frequentemente utilizzate in registri temporanei.
+\end{itemize}
+\end{nota}
+
+\paragraph{Dominio dell'analisi}
+
+Sia $AE$ l'insieme di tutte le espressioni aritmetiche non banali che
+compaiono nel programma. Lo stato dell'analisi in ogni punto del programma è
+un elemento di $\mathcal{P}(AE)$, ovvero un sottoinsieme delle espressioni
+aritmetiche.
+
+\begin{definizione}{Funzioni ausiliarie}{ae_auxiliary_functions}
+È possibile definire le seguenti funzioni ausiliarie:
+\begin{itemize}
+    \item $AExp : \textit{Expr} \to \mathcal{P}(AE)$ restituisce l'insieme
+    delle espressioni aritmetiche non banali contenute in un'espressione $e$.
+    \item $AExpB : \textit{BExpr} \to \mathcal{P}(AE)$ restituisce l'insieme
+    delle espressioni aritmetiche non banali contenute in un'espressione
+    booleana $b$.
+    \item $FV : AE \to \mathcal{P}(\textit{Var})$ restituisce l'insieme delle
+    variabili libere (free variables) che occorrono in un'espressione $a$.
+\end{itemize}
+\end{definizione}
+
+\paragraph{Funzioni di trasferimento}
+
+Per ogni statement del programma, è necessario definire le funzioni $gen$ e
+$kill$ che descrivono come lo statement modifica l'insieme delle espressioni
+disponibili.
+
+\begin{definizione}{Gen e Kill}{ae_gen_kill}
+Considerando un assegnamento $x := e$, dove $x$ è una variabile ed $e$
+un'espressione.
+\begin{itemize}
+    \item \textbf{Killed}: Quando $x$ viene assegnata, tutte le espressioni
+    che contengono $x$ non sono più valide (vengono "uccise") perché il
+    valore di $x$ è cambiato.
+    \[ kill(x := e) = \{ a \in AE \mid x \in FV(a) \} \]
+    Dove $FV(a)$ è l'insieme delle variabili libere in $a$.
+    
+    \item \textbf{Gen}: Quando $x$ viene assegnata, l'espressione
+    $e$ calcolata diventa disponibile, a condizione che $x$ non compaia
+    nell'espressione stessa (altrimenti il valore appena calcolato verrebbe
+    subito invalidato dall'assegnamento stesso).
+    \[ gen(x := e) = \{ a \in AE \mid x \notin FV(a) \} \]
+\end{itemize}
+\end{definizione}
+
+\paragraph{Equazioni di flusso}
+
+Per ogni blocco $i \in nodes(G)$ del CFG, definiamo lo stato entrante
+$entry(i)$ e lo stato uscente $exit(i)$.
+
+\begin{definizione}{Stato entrante}{ae_entry}
+Lo stato entrante di un blocco $i$ è dato dall'intersezione degli stati
+uscenti di tutti i suoi predecessori:
+\[
+entry(i) = \bigcap \{exit(j) \mid (j, i) \in edges(G)\}
+\]
+la scelta dell'intersezione ($\cap$) è determinata dalla natura \textbf{must}
+dell'analisi: un'espressione è disponibile solo se è disponibile lungo tutti
+i cammini che raggiungono il blocco.
+
+\end{definizione}
+
+\begin {nota}{Blocco iniziale}{ae_entry_initial}
+Se $i$ non ha predecessori (blocco iniziale), allora $entry(i) = \emptyset$.
+\end{nota}
+
+\begin{definizione}{Stato uscente}{ae_exit}
+Lo stato uscente di un blocco $i$ è calcolato applicando la funzione di
+trasferimento allo stato entrante:
+\[
+exit(i) = (entry(i) \setminus kill(stmt(G, i))) \cup gen(stmt(G, i))
+\]
+
+Ovvero:
+\begin{enumerate}
+    \item Si parte dalle espressioni disponibili in ingresso: $entry(i)$
+    \item Si rimuovono le espressioni invalidate: $\setminus kill(stmt(G, i))$
+    \item Si aggiungono le espressioni generate: $\cup gen(stmt(G, i))$
+\end{enumerate}
+\end{definizione}
+
+
+Da queste funzioni è possibile riscrivere le funzioni $gen$ e $kill$ in modo
+più generale:
+\begin{itemize}
+    \item $kill(x := \texttt{e}) = \{ a \in AE \mid x \in FV(\texttt{a}) \}$
+    \item $gen(x := \texttt{e}) = \{ a \in AE \mid x \notin FV(\texttt{a}) \}$
+\end{itemize}
+
+\subsubsection{Altre analisi di dataflow}
+
+Come accennato nella nota (\Cref{nt:types_of_df}), le analisi di dataflow
+possono essere classificate secondo vari criteri.
+In aggiunta all'analisi delle available expressions, esistono numerose altre
+analisi di dataflow utilizzate per diversi scopi nell'ottimizzazione del
+codice. Alcuni esempi di altre analisi viste nel corso di linguaggi interpreti e
+compilatori di dataflow includono:
+\begin{itemize}
+    \item \textbf{Live variables}
+    \item \textbf{Reaching definitions}
+    \item \textbf{Very busy expressions}
+\end{itemize}
+L'immagine seguente classifica alcune di queste analisi in base alla direzione del
+flusso e alla semantica della proprietà
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/th_04/02.png}
+  \caption{L'immagine illustra la classificazione di alcune analisi di dataflow.}
+  \label{fig:th_04_02}
+\end{figure}
+
+\begin{definizione}{Reaching definitions}{reaching_definitions}
+``For each program point, which assignments may have been made and not
+overwritten, when program execution reaches this point along some path''
+
+Un'assegnazione $d: x := e$ al blocco $i$ raggiunge (reaches) un punto del
+programma $p$ se esiste almeno un cammino dal blocco $i$ al punto $p$ lungo
+il quale la variabile $x$ non viene ridefinita.
+
+Quest'analisi è di tipo \textbf{forward} e \textbf{may}; l'informazione
+si propaga in avanti nel CFG ed è sufficiente che un'assegnazione raggiunga
+il punto lungo almeno un cammino.
+\end{definizione}
+
+\begin{definizione}{Live variables}{live_variables}
+``For each program point, which variables may be live at the exit from the
+program point. A variable is live if its content will be read in some path
+starting from the program point''
+
+Una variabile $x$ è viva (live) in un punto del programma $p$ se esiste
+almeno un cammino che parte da $p$ lungo il quale il valore di $x$ viene
+utilizzato prima di essere ridefinito.
+
+Quest'analisi è di tipo \textbf{backward} e \textbf{may}; l'informazione
+si propaga all'indietro nel CFG (dai successori ai predecessori) ed è
+sufficiente che la variabile sia utilizzata lungo almeno un cammino
+futuro.
+\end{definizione}
+
+\begin{definizione}{Very busy expressions}{very_busy_expressions}
+``For each program point, which expressions must be very busy at the exit
+from the point. An expression is very busy if it will be always used in all
+paths starting from a label before any of the variables occurring in it are
+redefined''
+
+Un'espressione $e$ è molto impegnativa (very busy) in un punto del programma
+$p$ se lungo ogni cammino che parte da $p$ l'espressione $e$ viene
+calcolata prima che qualsiasi variabile che occorre in $e$ venga ridefinita.
+
+Quest'analisi è di tipo \textbf{backward} e \textbf{must}; l'informazione
+si propaga all'indietro nel CFG e l'espressione deve essere utilizzata lungo
+tutti i cammini futuri.
+\end{definizione}
+
+\subsection{I reticoli nelle analisi di dataflow}
