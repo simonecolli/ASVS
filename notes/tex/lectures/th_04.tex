@@ -273,3 +273,87 @@ tutti i cammini futuri.
 \end{definizione}
 
 \subsection{I reticoli nelle analisi di dataflow}
+
+Tutte le analisi di dataflow discusse operano su dei reticoli completi
+(\Cref{def:complete_lattice}).
+
+\begin{definizione}{Reticolo delle analisi dataflow}{df_lattices}
+Ogni analisi dataflow può essere definita come una tupla che rappresenta un
+reticolo completo (\Cref{def:complete_lattice}).
+Per le analisi viste, i reticoli sono:
+\begin{enumerate}
+    \item \textbf{Available expressions}: $\langle \mathcal{P}(AE), \supseteq, \emptyset, AE, \cap, \cup \rangle$.
+    \item \textbf{Live variables}: $\langle \mathcal{P}(Var), \subseteq, \emptyset, Var, \cup, \cap \rangle$.
+    \item \textbf{Reaching definitions}: $\langle \mathcal{P}(Def), \subseteq, \emptyset, Def, \cup, \cap \rangle$.
+    \item \textbf{Very busy expressions}: $\langle \mathcal{P}(BE), \supseteq, \emptyset, BE, \cup, \cap \rangle$.
+\end{enumerate}
+
+Affinché l'algoritmo iterativo termini sicuramente, il reticolo deve soddisfare
+la ascending chain condition (\Cref{def:acc}).
+\end{definizione}
+
+\begin{nota}{Modellazione analisi statiche}{df_modeling}
+Non tutte le analisi statiche possono essere modellate come analisi di dataflow.
+\end{nota}
+
+\subsection{Analisi distributive}
+
+Le analisi dataflow classiche appartengono alla categoria delle analisi
+distributive
+Questa proprietà matematica è fondamentale perché garantisce che l'analisi
+possa essere risolta con algoritmi standard efficienti, ma ne limita anche la
+potenza espressiva.
+
+\begin{definizione}{Distributività}{distributivity}
+
+Sia $\langle \mathcal{P}(X), \subseteq, \emptyset, X, \cup, \cap \rangle$ un
+reticolo completo (\Cref{def:complete_lattice}) e $f: \mathcal{P}(X) \to \mathcal{P}(X)$
+una funzione (\Cref{def:function}). $f$ si dice \textbf{distributiva} se:
+\[ f(x \cup y) = f(x) \cup f(y) \]
+per ogni $x, y \in \mathcal{P}(X)$.
+
+\end{definizione}
+
+\begin{nota}{Intuizione}{distributive_analysis}
+
+Quanto descritto nella definizione sopra (\Cref{def:distributivity})
+in termini intuitivi, significa che il risultato dell'analisi è identico sia
+che si uniscano le informazioni prima di eseguire l'istruzione, sia
+che le si uniscano dopo averla eseguita su ogni singolo ramo.
+
+\end{nota}
+
+\begin{nota}{La potenza delle analisi distributive}{power_of_distributive_analyses}
+
+Le analisi distributive tengono traccia di \textbf{come} la computazione avviene
+(es. variabili che sono assegnate ed espressioni che vengono calcolate)
+all'interno del programma e non del \textbf{cosa} il programma calcola.
+
+Per questo motivo le analisi complesse non sono generalmente distributive e molto
+spesso non possono essere modellate come analisi di dataflow.
+
+\end{nota}
+
+\subsubsection{Constant propagation}
+
+Un esempio di analisi non distributiva è la constant propagation.
+
+\begin{definizione}{Constant propagation}{constant_propagation}
+``
+For each program point, whether or not a variable has a
+constant value whenever an execution reaches that point
+''
+
+Un reticolo per la constant propagation può essere definito come:
+\[
+CP = \langle \mathbb{Z} \cup \{\bot\} \cup \{\top\}, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/th_04/03.png}
+  \caption{L'immagine illustra il reticolo per la constant propagation.}
+  \label{fig:th_04_03}
+\end{figure}
+
+\end{definizione}
