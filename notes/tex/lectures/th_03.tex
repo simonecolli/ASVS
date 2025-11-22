@@ -163,17 +163,17 @@ non raggiunge mai un punto fisso in tempo finito.
 IMP è un linguaggio imperativo minimale che supporta assegnamenti,
 sequenze, condizionali e cicli.
 
-\subsubsection{Sintessi}
+\subsubsection{Sintassi}
 La sintassi del linguaggio è definita dalle seguenti produzioni
 grammaticali:
 \begin{itemize}
     \item \textbf{Espressioni aritmetiche ($e$):}
     \[ e ::= x \mid n \mid e_1 \ op_a \ e_2 \]
-    Dove $x$ è una variabile, $n \in \mathbb{Z}$ è un intero, e $op_a \in \{+, -, *, \div\}$.
+    dove $x$ è una variabile, $n \in \mathbb{Z}$ è un intero, e $op_a \in \{+, -, *, \div\}$.
 
     \item \textbf{Espressioni booleane ($b$):}
-    \[ b ::= \text{true} \mid \text{false} \mid \neg b_ \mid b_1 \ op_b \ b_2 \mid e_1 \ op_c \ e_2 \]
-    Dove $op_b \in \{\&\&, ||\}$ (logici) e $op_c \in \{==, <, >, \le, \ge\}$ (confronto).
+    \[ b ::= \text{true} \mid \text{false} \mid \neg b \mid b_1 \ op_b \ b_2 \mid e_1 \ op_c \ e_2 \]
+    dove $op_b \in \{\&\&, ||\}$ (logici) e $op_c \in \{==, <, >, \le, \ge\}$ (confronto).
 
     \item \textbf{Statement ($s$):}
     \[ s ::= x := e ; \mid \textbf{skip} \mid s_1 s_2 \mid \textbf{if}\ b \textbf{then}\ s_1 \textbf{else}\ s_2 \mid \textbf{while}\ b \textbf{do}\ s_1 \]
