@@ -345,13 +345,17 @@ interi è illimitato in entrambe le direzioni.
 
 \subsection{Complete lattice}
 
-\begin{definizione}{Complete lattice}{complete_lattice}
+\begin{definizione}{Reticolo completo}{complete_lattice}
 
 Un reticolo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ è detto completo se:
 \begin{itemize}
     \item Ogni sottoinsieme $Y \subseteq X$ ha un lub (\Cref{def:upper_bound}) in $X$.
     \item Ogni sottoinsieme $Y \subseteq X$ ha un glb (\Cref{def:lower_bound}) in $X$.
 \end{itemize}
+quindi si denota come:
+\[
+\langle X, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle
+\]
 
 \end{definizione}
 
@@ -362,20 +366,21 @@ In questo caso il lub del sottoinsieme vuoto è l'elemento bottom $\bot$ del
 reticolo.
 \end{nota}
 
-\begin{esempio}{Esempi di lattice completo e non completo}{es:complete_lattice_example}
+\begin{esempio}{Esempi di reticolo completo e non completo}{es:complete_lattice_example}
 
 Considerando l'insieme dei numeri interi $\mathbb{Z}$ con la relazione
 "minore o uguale di" ($\leq$), si può osservare che
 \[
-\langle \mathbb{Z}, \leq, \max, \min \rangle
+\langle \mathbb{Z}, \leq, \min, \max \rangle
 \]
 è un reticolo ma non è completo. Infatti, non esiste un elemento top
 ($\top$) in $\mathbb{Z}$, poiché non esiste un numero intero massimo.
 
 Se all'insieme dei numeri interi si aggiungono gli elementi
 $+\infty$ e $-\infty$, si ottiene l'insieme esteso
-$\mathbb{Z} \cup \{+\infty, -\infty\}$. In questo caso, il reticolo
-\[\langle \mathbb{Z} \cup \{+\infty, -\infty\}, \leq, \max, \min \rangle\]
+$\mathbb{Z} \cup \{+\infty, -\infty\}$.
+In questo caso, il reticolo
+\[\langle \mathbb{Z} \cup \{+\infty, -\infty\}, \leq, \min, \max \rangle\]
 diventa un reticolo completo, poiché ora esistono sia un elemento top
 ($+\infty$) che un elemento bottom ($-\infty$).
 
@@ -394,7 +399,7 @@ Un reticolo completo possiede le seguenti proprietà:
 \begin{itemize}
     \item reticolo completo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ ha un
     elemento top $\top$ e un elemento bottom $\bot$ e si denota come
-    \[\langle X, \sqsubseteq, \top, \bot, \sqcup, \sqcap \rangle\]
+    \[\langle X, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle\]
     \item I reticoli finiti sono completi.
     \item $\sqcup$ induce $\sqcap : \sqcap S = \sqcup \{y \mid \forall x \in S . y \sqsubseteq x\}$
     \item $\sqcap$ induce $\sqcup : \sqcup S = \sqcap \{y \mid \forall x \in S . x \sqsubseteq y\}$
