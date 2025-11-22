@@ -164,6 +164,7 @@ un'espressione.
 
 \paragraph{Equazioni di flusso}
 
+
 Per ogni blocco $i \in nodes(G)$ del CFG, definiamo lo stato entrante
 $entry(i)$ e lo stato uscente $exit(i)$.
 
@@ -205,6 +206,37 @@ più generale:
     \item $kill(x := \texttt{e}) = \{ a \in AE \mid x \in FV(\texttt{a}) \}$
     \item $gen(x := \texttt{e}) = \{ a \in AE \mid x \notin FV(\texttt{a}) \}$
 \end{itemize}
+
+\begin{definizione}{Funzione di Trasferimento}{transfer_function}
+In un'analisi dataflow, una funzione di trasferimento $f_i$ è una funzione
+matematica associata a ciascun blocco (o istruzione) $i$ del CFG che descrive
+come l'esecuzione di quel blocco trasforma lo stato dell'analisi.
+
+Formalmente, dato un reticolo completo $L$ che rappresenta il dominio
+dell'analisi, la funzione di trasferimento mappa lo stato in ingresso
+nello stato in uscita:
+\[ f_i : L \to L \]
+\[ exit(i) = f_i(entry(i)) \]
+
+Nelle analisi dataflow classiche (es. available
+expressions), la funzione di trasferimento assume tipicamente la forma:
+\[ f_i(x) = (x \setminus kill_i) \cup gen_i \]
+dove:
+\begin{itemize}
+    \item $x$ è lo stato in ingresso ($entry(i)$).
+    \item $kill_i$ è l'insieme degli elementi invalidati dall'istruzione $i$.
+    \item $gen_i$ è l'insieme degli elementi generati dall'istruzione $i$.
+\end{itemize}
+\end{definizione}
+
+\begin{nota}{Monotonia}{monotonicity}
+Affinché l'algoritmo iterativo (worklist) converga sicuramente a un punto
+fisso (terminazione), è richiesto che le funzioni di trasferimento siano
+monotone rispetto all'ordinamento del reticolo $\sqsubseteq$.
+Ovvero:
+\[ x \sqsubseteq y \implies f(x) \sqsubseteq f(y) \]
+Le funzioni basate su $gen$ e $kill$ soddisfano sempre questa proprietà.
+\end{nota}
 
 \subsubsection{Altre analisi di dataflow}
 
@@ -348,6 +380,17 @@ Un reticolo per la constant propagation può essere definito come:
 \[
 CP = \langle \mathbb{Z} \cup \{\bot\} \cup \{\top\}, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle
 \]
+dove $\bot$ rappresenta il valore costante di una variabile non definita,
+$\top$ rappresenta il valore non costante (variabile) e l'operatore di join
+$\sqcup$ è definito come:
+\[
+c_1 \sqcup c_2 =
+\begin{cases}
+c_1 & \text{se } c_1 = c_2 \\
+\top & \text{altrimenti}
+\end{cases}
+\]
+
 
 \begin{figure}[H]
   \centering
@@ -357,3 +400,95 @@ CP = \langle \mathbb{Z} \cup \{\bot\} \cup \{\top\}, \sqsubseteq, \bot, \top, \s
 \end{figure}
 
 \end{definizione}
+
+\begin{nota}{Non distributività della constant propagation}{cp_non_distributive}
+
+    Considerando il seguente frammento di codice:
+
+\begin{verbatim}
+if (condition) then
+    y := 1
+    z := -1
+else
+    y := 0
+    z := 0
+end if
+
+x := y + z
+\end{verbatim}
+
+Da qui è possibile costruire il seguente CFG:
+
+\begin{center}
+    \begin{tikzpicture}
+        % Nodo sinistro (Stato s0)
+        \node[align=left] (left_state) at (-2.5, 2) {
+            $y \mapsto 1$ \\
+            $z \mapsto -1$
+        };
+
+        % Nodo destro (Stato s1)
+        \node[align=left] (right_state) at (2.5, 2) {
+            $y \mapsto 0$ \\
+            $z \mapsto 0$
+        };
+
+        % Box centrale (Istruzione)
+        \node[draw, thick, minimum width=3.5cm, minimum height=1.5cm] (instruction) at (0, 0) {
+            \Large $x := y + z$
+        };
+
+        % Frecce
+        \draw[->, >=stealth] (left_state.south east) -- (instruction.130);
+        \draw[->, >=stealth] (right_state.south west) -- (instruction.50);
+    \end{tikzpicture}
+\end{center}
+
+Dal CFG sopra è possibile costruire due insiemi di stati:
+\begin{itemize}
+    \item Stato $s_0$ (nodo sinistro): $ \{ y \mapsto 1, z \mapsto -1 \} $
+    \item Stato $s_1$ (nodo destro): $ \{ y \mapsto 0, z \mapsto 0 \} $
+\end{itemize}
+
+La funzione di trasferimeno al join point (l'istruzione $x := y + z$) calcola il
+nuovo stato:
+\[
+f(s_{in}) = f(s_0 \sqcup s_1)
+\]
+dove $\sqcup$ è l'operatore di join del reticolo CP.
+
+Per verificare se la constant propagation è distributiva, è necessario calcolare
+$f(s_0 \sqcup s_1)$ e confrontarlo con $f(s_0) \sqcup f(s_1)$.:
+ 
+
+Prima di eseguire l'istruzione, l'analisi unisce le informazioni provenienti
+dai due rami:
+\begin{itemize}
+    \item Per $y$: $1 \sqcup 0 = \top$.
+    \item Per $z$: $-1 \sqcup 0 = \top$.
+\end{itemize}
+Quindi lo stato unito è $s_{join} = [ y \mapsto \top, z \mapsto \top ]$.
+
+
+Successivamente l'analisi valuta $x := y + z$ usando lo stato $s_{join}$:
+\[ x := \top + \top \implies x \mapsto \top \]
+Quindi $f(s_0 \sqcup s_1) = [ x \mapsto \top, y \mapsto \top, z \mapsto \top ]$,
+portando al risultato che $x$ non è costante.
+
+\medskip
+
+Tuttavia, se l'analisi fosse distributiva si dovrebbe ottenere lo stesso
+risultato unendo i risultati delle singole esecuzioni ($f(s_0) \sqcup f(s_1)$):
+
+\begin{itemize}
+    \item Nel ramo sinistro ($s_0$): $x := 1 + (-1) = 0$.
+    \item Nel ramo destro ($s_1$): $x := 0 + 0 = 0$.
+    \item Unione dei risultati: $0 \sqcup 0 = 0$.
+\end{itemize}
+
+Poiché il risultato reale dell'analisi ($\top$) è diverso e meno preciso del risultato ideale ($0$):
+\[ f(s_0 \sqcup s_1) \neq f(s_0) \sqcup f(s_1) \]
+\[ \top \neq 0 \]
+si dimostra che la propagazione delle costanti non è un'analisi distributiva.
+
+\end{nota}
