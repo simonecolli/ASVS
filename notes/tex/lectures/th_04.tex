@@ -42,7 +42,7 @@ Dato un CFG, è possibile definire:
 \end{itemize}
 \end{definizione}
 
-\subsection{Analisi di dataflow}
+\subsection{Analisi di dataflow}\label{subsec:dataflow_analysis}
 
 Le analisi di dataflow sono tecniche tradizionali utilizzate principalmente
 per le ottimizzazioni nei compilatori.
@@ -149,7 +149,7 @@ Considerando un assegnamento $x := e$, dove $x$ è una variabile ed $e$
 un'espressione.
 \begin{itemize}
     \item \textbf{Killed}: Quando $x$ viene assegnata, tutte le espressioni
-    che contengono $x$ non sono più valide (vengono "uccise") perché il
+    che contengono $x$ non sono più valide (vengono ``uccise'') perché il
     valore di $x$ è cambiato.
     \[ kill(x := e) = \{ a \in AE \mid x \in FV(a) \} \]
     Dove $FV(a)$ è l'insieme delle variabili libere in $a$.
