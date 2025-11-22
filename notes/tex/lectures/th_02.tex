@@ -349,11 +349,18 @@ interi è illimitato in entrambe le direzioni.
 
 Un reticolo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ è detto completo se:
 \begin{itemize}
-    \item Ogni sottoinsieme $Y \subseteq X$ ha un lub in $X$.
-    \item È presente un elemento bottom $\bot$ in $X$.
+    \item Ogni sottoinsieme $Y \subseteq X$ ha un lub (\Cref{def:upper_bound}) in $X$.
+    \item Ogni sottoinsieme $Y \subseteq X$ ha un glb (\Cref{def:lower_bound}) in $X$.
 \end{itemize}
 
 \end{definizione}
+
+\begin{nota}{Lub del sottoinsieme vuoto}{lub_empty_set}
+Se ogni sottoinsieme $Y \subseteq X$ ha un lub in $X$, allora anche il
+sottoinsieme vuoto $\emptyset$ deve avere un lub in $X$.
+In questo caso il lub del sottoinsieme vuoto è l'elemento bottom $\bot$ del
+reticolo.
+\end{nota}
 
 \begin{esempio}{Esempi di lattice completo e non completo}{es:complete_lattice_example}
 
