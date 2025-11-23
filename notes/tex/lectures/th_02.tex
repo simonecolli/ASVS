@@ -65,25 +65,25 @@ ordine parziale. In questo caso è possibile verificare che:
 
 Dato un insieme $S$, definito in \Cref{def:set}, l'insieme delle parti
 (powerset) di $S$ è l'insieme di tutti i sottoinsiemi di $S$, ed è indicato
-con $\mathcal{P}(S)$.
+con $\wp(S)$.
 
 Dato un insieme $S$ con $|S| = n$ elementi è possibile determinare che l'insieme
-delle parti di $S$ ha $|\mathcal{P}(S)| = 2^n$ elementi.
+delle parti di $S$ ha $|\wp(S)| = 2^n$ elementi.
 
 \end{definizione}
 
 \begin{esempio}{Alcuni esempi di powerset}{es:powerset_examples}
 
     Dato l'insieme vuoto $\emptyset$, il suo powerset è:
-    \[\mathcal{P}(\emptyset) = \{\emptyset\}\]
+    \[\wp(\emptyset) = \{\emptyset\}\]
     ed ha $2^0 = 1$ elemento.
 
     Dato un insieme $X = \{a, b\}$, il suo powerset è:
-    \[\mathcal{P}(X) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\}\]
+    \[\wp(X) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\}\]
     ed ha $2^2 = 4$ elementi.
 
     Dato l'insieme $\mathbb{Z}$ dei numeri interi, il suo powerset è:
-    \[\mathcal{P}(\mathbb{Z}) = \{\emptyset, \{\ldots, -2, -1, 0, 1, 2,
+    \[\wp(\mathbb{Z}) = \{\emptyset, \{\ldots, -2, -1, 0, 1, 2,
     \ldots\}, \{0\}, \{1, 2, 3\}, \ldots\}\]
     ed ha un numero infinito di elementi.
 
@@ -93,26 +93,26 @@ Dato un powerset è possibile definire un ordine parziale $\subseteq$ su di
 esso e verificare che esso soddisfa le proprietà di un ordine parziale:
 
 \begin{itemize}
-    \item \textbf{Riflessività:} $\forall X_{1}\in \mathcal{P}(X). X_{1}\subseteq X_{1}$
-    \item \textbf{Anti-simmetria:} $\forall X_{1},X_{2}\in\mathcal{P}(X).X_{1}\subseteq X_{2}\wedge X_{2}\subseteq X_{1}\Rightarrow X_{1}=X_{2}$
-    \item \textbf{Transitività:} $\forall X_{1},X_{2},X_{3}\in\mathcal{P}(X).X_{1}\subseteq X_{2}\wedge X_{2}\subseteq X_{3}\Rightarrow X_{1}\subseteq X_{3}$
+    \item \textbf{Riflessività:} $\forall X_{1}\in \wp(X). X_{1}\subseteq X_{1}$
+    \item \textbf{Anti-simmetria:} $\forall X_{1},X_{2}\in\wp(X).X_{1}\subseteq X_{2}\wedge X_{2}\subseteq X_{1}\Rightarrow X_{1}=X_{2}$
+    \item \textbf{Transitività:} $\forall X_{1},X_{2},X_{3}\in\wp(X).X_{1}\subseteq X_{2}\wedge X_{2}\subseteq X_{3}\Rightarrow X_{1}\subseteq X_{3}$
 \end{itemize}
 
 
 \begin{esercizio}{Inclusione inversa su powerset}{inverse_powerset_order}
 
-L'inclusione inversa su un powerset $\mathcal{P}(X)$ è un ordine parziale?
-Per verificare se $\supseteq$ è un ordine parziale su $\mathcal{P}(X)$,
+L'inclusione inversa su un powerset $\wp(X)$ è un ordine parziale?
+Per verificare se $\supseteq$ è un ordine parziale su $\wp(X)$,
 è necessario verificare se soddisfa le tre proprietà di un ordine parziale.
 
 \begin{itemize}
-    \item \textbf{Riflessività:} $\forall X_1 \in \mathcal{P}(X) \Rightarrow
+    \item \textbf{Riflessività:} $\forall X_1 \in \wp(X) \Rightarrow
     X_1 \supseteq X_1$, indica che ogni insieme è sovrainsieme di se stesso.
-    \item \textbf{Anti-simmetria:} $\forall X_1, X_2 \in \mathcal{P}(X),
+    \item \textbf{Anti-simmetria:} $\forall X_1, X_2 \in \wp(X),
     (X_1 \supseteq X_2 \wedge X_2 \supseteq X_1) \Rightarrow X_1 = X_2$,
     indica che se ogni elemento di $X_1$ è anche in $X_2$ e che ogni elemento di
     $X_2$ è anche in $X_1$, allora $X_1$ e $X_2$ sono lo stesso insieme.
-    \item \textbf{Transitività:} $\forall X_1, X_2, X_3 \in \mathcal{P}(X),
+    \item \textbf{Transitività:} $\forall X_1, X_2, X_3 \in \wp(X),
     (X_1 \supseteq X_2 \wedge X_2 \supseteq X_3) \Rightarrow X_1 \supseteq X_3$,
     indica che se $X_1$ è un sovrainsieme di $X_2$, e $X_2$ è un sovrainsieme di
     $X_3$, allora $X_1$ è un sovrainsieme di $X_3$.
@@ -120,7 +120,7 @@ Per verificare se $\supseteq$ è un ordine parziale su $\mathcal{P}(X)$,
 
 Poiché tutte e tre le proprietà sono soddisfatte, è possibile concludere che
 l'inclusione inversa $\supseteq$ è un ordine parziale su il powerset
-$\mathcal{P}(X)$. Quindi $\langle X, \supseteq \rangle$ è un poset.
+$\wp(X)$. Quindi $\langle X, \supseteq \rangle$ è un poset.
 
 \end{esercizio}
 
@@ -185,7 +185,7 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 \end{definizione}
 
 \begin{esercizio}{Lub e glb su powerset}{lub_glb_powerset}
-Dato il Poset $\langle \mathcal{P}(X), \subseteq \rangle$, e siano $S_{1},S_{2}\in \mathcal{P}(X)$:
+Dato il Poset $\langle \wp(X), \subseteq \rangle$, e siano $S_{1},S_{2}\in \wp(X)$:
 \begin{enumerate}
     \item $S_{1}\cup S_{2}$ è l'estremo superiore (lub) di $\{S_{1},S_{2}\}$?
     \item $S_{1}\cap S_{2}$ è l'estremo inferiore (glb) di $\{S_{1},S_{2}\}$?
@@ -308,11 +308,11 @@ elementi $x,y \in X$, ovvero $x \sqsubseteq y$ se e solo se:
 
 \begin{definizione}{Set lattice}{set_lattice}
 Le operazioni insiemistiche definiscono una struttura di reticolo.
-Dato il poset $\langle \mathcal{P}(X), \subseteq \rangle$, esso forma un
+Dato il poset $\langle \wp(X), \subseteq \rangle$, esso forma un
 reticolo rispetto alle operazioni di unione ($\cup$) e intersezione
 ($\cap$), denotato come:
 \[
-\langle \mathcal{P}(X), \subseteq, \cup, \cap \rangle
+\langle \wp(X), \subseteq, \cup, \cap \rangle
 \]
 
 Se l'insieme $X$ è finito, allora il reticolo ha altezza finita.
@@ -526,7 +526,7 @@ e una funzione $f: X \to Y$, è possibile dire che:
 
 
 \begin{esempio}{Esempio di funzione monotona ma che non è un embedding}{}
-    Data $f: \langle \mathcal{P}(\mathbb{Z}), \subseteq \rangle \to \langle \mathbb{Z}, \le \rangle$,
+    Data $f: \langle \wp(\mathbb{Z}), \subseteq \rangle \to \langle \mathbb{Z}, \le \rangle$,
     definita come $f(X) = \max(X)$, è possibile osservare che:
     \begin{itemize}
         \item La funzione è monotona.
@@ -570,7 +570,7 @@ tutti gli elementi contenuti sono completamente ordinati, ovvero:
 \end{definizione}
 
 \begin{esempio}{Esempio di catena}{chain_example}
-    Dato un poset $\langle \mathcal{P}(\mathbb{Z}), \subseteq \rangle$ con
+    Dato un poset $\langle \wp(\mathbb{Z}), \subseteq \rangle$ con
     reticolo rappresentato nell'immagine sottostante (\ref{fig:th_02_07}),
     esempi di catene sono:
     \begin{itemize}
@@ -582,7 +582,7 @@ tutti gli elementi contenuti sono completamente ordinati, ovvero:
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{images/th_02/07.png}
-        \caption{L'immagine illustra un reticolo su $\mathcal{P}(\mathbb{Z})$.}
+        \caption{L'immagine illustra un reticolo su $\wp(\mathbb{Z})$.}
         \label{fig:th_02_07}
     \end{figure}
 \end{esempio}
@@ -641,8 +641,7 @@ applicare il Teorema di Kleene per calcolare i punti fissi (fixpoints)
 tramite iterazione.
 \end{nota}
 
-\subsection{Fixpoint}
-
+\subsection{Fixpoint}\label{subsec:fixpoint}
 
 L'analisi statica riduce spesso il problema della verifica di un programma
 alla ricerca della soluzione di un sistema di equazioni ricorsive.

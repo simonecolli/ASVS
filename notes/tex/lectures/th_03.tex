@@ -23,7 +23,7 @@ Considerando il programma seguente:
 \end{verbatim}
 
 e definendo il reticolo dei valori interi come $\langle
-\mathcal{P}(\mathbb{Z}), \subseteq, \cup, \cap \rangle$ è possibile
+\wp(\mathbb{Z}), \subseteq, \cup, \cap \rangle$ è possibile
 calcolare i possibili valori delle variabili $i$ e $j$ in ogni punto
 del programma.
 
@@ -119,7 +119,7 @@ incrementa un contatore:
 4: ...
 \end{verbatim}
 
-Utilizzando il reticolo $\langle \mathcal{P}(\mathbb{Z}), \subseteq, \cup, \cap \rangle$,
+Utilizzando il reticolo $\langle \wp(\mathbb{Z}), \subseteq, \cup, \cap \rangle$,
 è possibile calcolare i valori di $i$ al punto $2$ (l'ingresso del ciclo).
 Lo stato al punto $2$ è definito come l'unione del valore iniziale (da 1) e
 del valore di ritorno dal ciclo (da 3):
@@ -154,7 +154,7 @@ Passo passo:
 \end{center}
 
 Si nota che l'insieme continua a crescere ($ \{0, 1, 2, 3, \dots\} $) e,
-poiché il reticolo $\mathcal{P}(\mathbb{Z})$ ha altezza infinita, l'algoritmo
+poiché il reticolo $\wp(\mathbb{Z})$ ha altezza infinita, l'algoritmo
 non raggiunge mai un punto fisso in tempo finito.
 \end{esempio}
 
@@ -183,7 +183,7 @@ grammaticali:
 \subsubsection{Semantica concreta}
 %TODO
 
-\subsection{Semantica delle tracce}
+\subsection{Semantica delle tracce}\label{subsec:trace_semantics}
 
 Per analizzare il comportamento di un programma, è necessario definire cosa
 significa ``eseguirlo''. La semantica di traccia modella l'esecuzione
@@ -204,7 +204,7 @@ evoluzione del programma. Le tracce possono essere:
 È possibile modellare la semantica concreta, ovvero l'insieme di tutte le
 possibili esecuzioni, utilizzando un reticolo definito come:
 \[
-\langle \mathcal{P}(X^{\infty}), \subseteq, \cup, \cap \rangle
+\langle \wp(X^{\infty}), \subseteq, \cup, \cap \rangle
 \]
 
 \begin{figure}[H]

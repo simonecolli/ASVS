@@ -122,18 +122,18 @@ obiettivi principali:
 
 Sia $AE$ l'insieme di tutte le espressioni aritmetiche non banali che
 compaiono nel programma. Lo stato dell'analisi in ogni punto del programma è
-un elemento di $\mathcal{P}(AE)$, ovvero un sottoinsieme delle espressioni
+un elemento di $\wp(AE)$, ovvero un sottoinsieme delle espressioni
 aritmetiche.
 
 \begin{definizione}{Funzioni ausiliarie}{ae_auxiliary_functions}
 È possibile definire le seguenti funzioni ausiliarie:
 \begin{itemize}
-    \item $AExp : \textit{Expr} \to \mathcal{P}(AE)$ restituisce l'insieme
+    \item $AExp : \textit{Expr} \to \wp(AE)$ restituisce l'insieme
     delle espressioni aritmetiche non banali contenute in un'espressione $e$.
-    \item $AExpB : \textit{BExpr} \to \mathcal{P}(AE)$ restituisce l'insieme
+    \item $AExpB : \textit{BExpr} \to \wp(AE)$ restituisce l'insieme
     delle espressioni aritmetiche non banali contenute in un'espressione
     booleana $b$.
-    \item $FV : AE \to \mathcal{P}(\textit{Var})$ restituisce l'insieme delle
+    \item $FV : AE \to \wp(\textit{Var})$ restituisce l'insieme delle
     variabili libere (free variables) che occorrono in un'espressione $a$.
 \end{itemize}
 \end{definizione}
@@ -314,10 +314,10 @@ Ogni analisi dataflow può essere definita come una tupla che rappresenta un
 reticolo completo (\Cref{def:complete_lattice}).
 Per le analisi viste, i reticoli sono:
 \begin{enumerate}
-    \item \textbf{Available expressions}: $\langle \mathcal{P}(AE), \supseteq, \emptyset, AE, \cap, \cup \rangle$.
-    \item \textbf{Live variables}: $\langle \mathcal{P}(Var), \subseteq, \emptyset, Var, \cup, \cap \rangle$.
-    \item \textbf{Reaching definitions}: $\langle \mathcal{P}(Def), \subseteq, \emptyset, Def, \cup, \cap \rangle$.
-    \item \textbf{Very busy expressions}: $\langle \mathcal{P}(BE), \supseteq, \emptyset, BE, \cup, \cap \rangle$.
+    \item \textbf{Available expressions}: $\langle \wp(AE), \supseteq, \emptyset, AE, \cap, \cup \rangle$.
+    \item \textbf{Live variables}: $\langle \wp(Var), \subseteq, \emptyset, Var, \cup, \cap \rangle$.
+    \item \textbf{Reaching definitions}: $\langle \wp(Def), \subseteq, \emptyset, Def, \cup, \cap \rangle$.
+    \item \textbf{Very busy expressions}: $\langle \wp(BE), \supseteq, \emptyset, BE, \cup, \cap \rangle$.
 \end{enumerate}
 
 Affinché l'algoritmo iterativo termini sicuramente, il reticolo deve soddisfare
@@ -338,11 +338,11 @@ potenza espressiva.
 
 \begin{definizione}{Distributività}{distributivity}
 
-Sia $\langle \mathcal{P}(X), \subseteq, \emptyset, X, \cup, \cap \rangle$ un
-reticolo completo (\Cref{def:complete_lattice}) e $f: \mathcal{P}(X) \to \mathcal{P}(X)$
+Sia $\langle \wp(X), \subseteq, \emptyset, X, \cup, \cap \rangle$ un
+reticolo completo (\Cref{def:complete_lattice}) e $f: \wp(X) \to \wp(X)$
 una funzione (\Cref{def:function}). $f$ si dice \textbf{distributiva} se:
 \[ f(x \cup y) = f(x) \cup f(y) \]
-per ogni $x, y \in \mathcal{P}(X)$.
+per ogni $x, y \in \wp(X)$.
 
 \end{definizione}
 
