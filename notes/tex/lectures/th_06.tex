@@ -3,7 +3,7 @@
 \subsection{Intuizione e necessità dell'approssimazione}
 
 Considerando una proprietà semantica concreta di un programma, denotata come
-$[[P]]$, e una proprietà target $Q$ che si vuole verificare verificare.
+$[[P]]$, e una proprietà target $Q$ che si vuole verificare.
 L'obiettivo ideale sarebbe verificare se $[[P]] \subseteq Q$.
 Tuttavia, a causa del Teorema di Rice e dell'indecidibilità dell'arresto,
 questa inclusione è in generale indecidibile.
@@ -60,7 +60,7 @@ Un'astrazione in un dominio di proprietà $\wp(\Sigma)$ di oggetti in $\Sigma$
 
 \subsubsection{Oggetti}
 
-Quando si analizza un protramma è necessario considerare oggetti che rappresentano
+Quando si analizza un programma è necessario considerare oggetti che rappresentano
 parti dello stato di esecuzione. Tra questi è possibile includere:
 \begin{itemize}
     \item Valori delle variabili (interi, booleani, puntatori, ecc.).
@@ -119,7 +119,7 @@ Quando si approssima una proprietà concreta $P$ con una astratta $P^{\#}$,
 
 
 \subsubsection{Approssimazione dal basso}
-Nal caso di approssimazione dal basso, $P^{\#} \subseteq P$ se un elemento
+Nel caso di approssimazione dal basso, $P^{\#} \subseteq P$ se un elemento
 appartiene a $P^{\#}$, è certo che appartenga a $P$ (``Yes''), ma se non
 appartiene, non sappiamo (``I don't know'').
 
@@ -140,14 +140,14 @@ In questa configurazione, si presentano due casi distinti:
 
 \begin{itemize}
     \item \textbf{Caso 1: $\langle x, y \rangle \notin P^{\#}$.}
-    Se l'elemento non si trova nell'insieme astratto, non possiamo concludere
+    Se l'elemento non si trova nell'insieme astratto, non si può concludere
     nulla rispetto all'insieme concreto. Potrebbe trovarsi in $P$
     (ma fuori da $P^{\#}$) oppure essere completamente esterno a $P$.
     La risposta è quindi: \textbf{``I don't know''}.
 
     \item \textbf{Caso 2: $\langle x, y \rangle \in P^{\#}$.}
     Se l'elemento si trova nell'insieme astratto, poiché $P^{\#}$ è un
-    sottoinsieme di $P$, siamo certi che l'elemento appartenga anche
+    sottoinsieme di $P$, si è certi che l'elemento appartenga anche
     all'insieme concreto. La risposta è quindi: \textbf{``Yes''}.
 \end{itemize}
 

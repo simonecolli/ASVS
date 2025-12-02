@@ -133,7 +133,7 @@ una relazione di ordine parziale (\Cref{def:partial_order}) su $X$.
 \end{definizione}
 
 \begin{nota}{Esempio di poset}{poset_example}
-L'esercizio \Cref{ex:inverse_powerset_order} ha mostrato che l'inclusione
+L'esercizio \Cref{es:inverse_powerset_order} ha mostrato che l'inclusione
 inversa su un powerset $\wp(X)$ è un ordine parziale.
 Quindi $\langle X, \supseteq \rangle$ è un poset.
 \end{nota}
@@ -158,7 +158,6 @@ un elemento $x$ è posizionato più in alto di un elemento $y$ se $x$ è
     di un poset originale.
     Graficamente, questo si traduce nel riflettere il diagramma di Hasse
     rispetto ad un asse orizzontale, ovvero ruotando di 180 gradi il diagramma.
-\end{nota}
 
 \begin{figure}[H]
     \centering
@@ -167,6 +166,8 @@ un elemento $x$ è posizionato più in alto di un elemento $y$ se $x$ è
     e il suo poset inverso.}
     \label{fig:th_02_01}
 \end{figure}
+
+\end{nota}
 
 \subsection{Upper e lower bounds}
 
@@ -252,9 +253,9 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ è possibile definire:
     \item $\sqcap X$ esiste se e solo se $X$ ha un elemento $\bot$ ($\sqcap X = \bot$).
 \end{itemize}
 \end{proposizione}
-\subsection{Lattice}
+\subsection{Reticolo}
 
-\begin{definizione}{Lattice}{lattice}
+\begin{definizione}{Reticolo}{lattice}
 Dato un poset $\langle X, \sqsubseteq \rangle$, esso è un reticolo (lattice) se
 soddisfa entrambe le seguenti proprietà:
 
@@ -357,11 +358,11 @@ interi è illimitato in entrambe le direzioni.
 
 \end{nota}
 
-\subsection{Complete lattice}
+\subsection{Reticolo completo}
 
 \begin{definizione}{Reticolo completo}{complete_lattice}
 
-Un reticolo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ è detto completo se:
+Un reticolo $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ (\Cref{def:lattice}) è detto completo se:
 \begin{itemize}
     \item Ogni sottoinsieme $Y \subseteq X$ ha un lub (\Cref{def:upper_bound}) in $X$.
     \item Ogni sottoinsieme $Y \subseteq X$ ha un glb (\Cref{def:lower_bound}) in $X$.

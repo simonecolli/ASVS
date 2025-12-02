@@ -4,7 +4,7 @@
 
 Il dominio concreto $C$ rappresenta l'universo dei valori reali che il
 programma può assumere.
-In questo caso vine considerato il dominio concreto come l'insieme delle parti
+In questo caso viene considerato il dominio concreto come l'insieme delle parti
 dell'insieme dei numeri interi.
 
 \begin{definizione}{Lattice del Dominio Concreto}{concrete_domain_lattice}
@@ -64,8 +64,8 @@ Partendo da un valore concreto $c \in C$:
 \end{enumerate}
 Per avere soundness, il risultato $c'$ deve essere una sovra-approssimazione
 (o uguale) del valore di partenza $c$.
-Ovvero, nel processo di astrazione possiamo perdere precisione (ottenere
-un insieme più grande), ma non possiamo perdere valori originali.
+Ovvero, nel processo di astrazione si può perdere precisione (ottenere
+un insieme più grande), ma non si possono perdere valori originali.
 
 Analogamente, partendo da un valore astratto $a \in A$:
 \begin{enumerate}
@@ -74,7 +74,7 @@ Analogamente, partendo da un valore astratto $a \in A$:
 \end{enumerate}
 Il risultato $a'$ deve essere più preciso (o uguale) rispetto ad
 $a$ ($a' \sqsubseteq_A a$). Concretizzare non perde informazione, quindi
-ri-astrarre dovrebbe restituirci qualcosa di idealmente identico o migliore.
+ri-astrarre dovrebbe restituire qualcosa di idealmente identico o migliore.
 
 \subsection{Monotonia}
 
@@ -207,7 +207,7 @@ definizione di Galois Connection (\Cref{def:galois_connection}).
 
 \subsection{Estensione agli stati}
 
-Finora abbiamo si è parlato di astrazione di valori (es. un intero).
+Finora si è parlato di astrazione di valori (es. un intero).
 Ma le analisi lavorano su stati ($\Sigma: \text{Var} \to \text{Valori}$).
 
 \begin{proposizione}{Astrazione pointwise}{pointwise_abstraction}
