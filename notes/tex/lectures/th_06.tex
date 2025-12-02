@@ -3,22 +3,22 @@
 \subsection{Intuizione e necessità dell'approssimazione}
 
 Considerando una proprietà semantica concreta di un programma, denotata come
-$[[P]]$, e una proprietà target $Q$ che si vuole verificare.
-L'obiettivo ideale sarebbe verificare se $[[P]] \subseteq Q$.
+$[\![P]\!]$, e una proprietà target $Q$ che si vuole verificare.
+L'obiettivo ideale sarebbe verificare se $[\![P]\!] \subseteq Q$.
 Tuttavia, a causa del Teorema di Rice e dell'indecidibilità dell'arresto,
 questa inclusione è in generale indecidibile.
-Per questo motivo si ricorre ad un'approssimazione ${[[P]]}^{\#}$ di $[[P]]$.
+Per questo motivo si ricorre ad un'approssimazione ${[\![P]\!]}^{\#}$ di $[\![P]\!]$.
 
 \begin{definizione}{Approssimazione}{approximation}
 
     Per rendere il problema decidibile, si calcola un'approssimazione
-${[[P]]}^{\#}$ della semantica concreta $[[P]]$ tale che rispetti due proprietà:
+${[\![P]\!]}^{\#}$ della semantica concreta $[\![P]\!]$ tale che rispetti due proprietà:
 \begin{itemize}
-    \item \textbf{Soundness (Correttezza)}: $[[P]] \subseteq {[[P]]}^{\#}$.
+    \item \textbf{Soundness (Correttezza)}: $[\![P]\!] \subseteq {[\![P]\!]}^{\#}$.
     L'approssimazione deve includere tutti i comportamenti reali del
     programma.
     \item \textbf{Decidability (Decidibilità)}: La verifica
-    ${[[P]]}^{\#} \subseteq Q$ deve essere decidibile.
+    ${[\![P]\!]}^{\#} \subseteq Q$ deve essere decidibile.
 \end{itemize}
 
 \end{definizione}
@@ -27,12 +27,12 @@ ${[[P]]}^{\#}$ della semantica concreta $[[P]]$ tale che rispetti due proprietà
 
 La condizione di soundness è cruciale (\Cref{def:approximation}).
 Se si riesce a dimostrare che l'approssimazione è sicura
-(${[[P]]}^{\#} \subseteq Q$), allora per la proprietà di transitività
+(${[\![P]\!]}^{\#} \subseteq Q$), allora per la proprietà di transitività
 dell'inclusione, è concludere che anche il programma reale è
-sicuro ($[[P]] \subseteq Q$).
+sicuro ($[\![P]\!] \subseteq Q$).
 
 Tuttavia, se l'approssimazione non soddisfa la proprietà
-(${[[P]]}^{\#} \not\subseteq Q$), non è possibile concludere nulla con
+(${[\![P]\!]}^{\#} \not\subseteq Q$), non è possibile concludere nulla con
 certezza; potrebbe trattarsi di un vero bug o di un falso allarme dovuto
 all'imprecisione dell'astrazione (``I don't know'').
 
@@ -72,7 +72,7 @@ parti dello stato di esecuzione. Tra questi è possibile includere:
 
 \subsubsection{Proprietà e reticolo delle proprietà}
 
-\begin{definizione} {Proprietà}{property_def}
+\begin{definizione}{Proprietà}{property_def}
 Le proprietà sono insiemi (\Cref{def:set}) di oggetti (valori, variabili, stack, ecc.)
 che condividono una certa caratteristica.
 \end{definizione}

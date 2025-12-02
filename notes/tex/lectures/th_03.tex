@@ -179,9 +179,70 @@ grammaticali:
     \[ s ::= x := e ; \mid \textbf{skip} \mid s_1 s_2 \mid \textbf{if}\ b \textbf{then}\ s_1 \textbf{else}\ s_2 \mid \textbf{while}\ b \textbf{do}\ s_1 \]
 \end{itemize}
 
-
 \subsubsection{Semantica concreta}
-%TODO
+Dato un insieme delle variabili $X$, è possibile costruire un insieme delle
+memorie $\mathbb{M} : X \to \mathbb{Z}$.
+Da questo è possibile definire la semantica di uno statement come
+$[\![ \cdot ]\!] : \mathbb{M} \to \mathbb{M}$ e la semantica delle espressioni come
+$[\![ \cdot ]\!]_e : \mathbb{M} \to \mathbb{Z}$.
+
+\paragraph{Semantica delle espressioni aritmetiche}
+Dato uno stato di memoria $m \in \mathbb{M}$, la funzione di valutazione semantica per le espressioni aritmetiche è definita per induzione strutturale come segue:
+
+\begin{itemize}
+    \item \textbf{Costanti ($n \in \mathbb{Z}$)}: Il valore di una costante è la costante stessa.
+    \[ [\![ n ]\!]_e m = n \]
+    
+    \item \textbf{Variabili ($x \in X$)}: Il valore di una variabile è ottenuto tramite lookup nella memoria $m$.
+    \[ [\![ x ]\!]_e m = m(x) \]
+    
+    \item \textbf{Operazioni binarie}: Date due espressioni $e_1, e_2$ e un operatore $op \in \{+, -, \times, /\}$, la semantica è l'applicazione dell'operatore ai valori valutati delle sotto-espressioni.
+    \[ [\![ e_1 \ op \ e_2 ]\!]_e m = [\![ e_1 ]\!]_e m \ op \ [\![ e_2 ]\!]_e m \]
+\end{itemize}
+
+\paragraph{Semantica delle espressioni booleane}
+La semantica delle espressioni booleane mappa uno stato di memoria in un valore di verità $\{tt, ff\}$. La funzione è denotata come $[\![ \cdot ]\!]_b : \mathbb{M} \to \{tt, ff\}$.
+
+\begin{itemize}
+    \item \textbf{Costanti}: $[\![ \text{true} ]\!]_b m = tt$ e $[\![ \text{false} ]\!]_b m = ff$.
+    \item \textbf{Negazione}: $[\![ \neg b ]\!]_b m = \neg ([\![ b ]\!]_b m)$.
+    \item \textbf{Operatori logici}:
+    \[ [\![ b_1 \land b_2 ]\!]_b m = [\![ b_1 ]\!]_b m \land [\![ b_2 ]\!]_b m \]
+    (analogamente per $\lor$).
+    \item \textbf{Operatori relazionali}: Dati $e_1, e_2$ espressioni aritmetiche e un operatore relazionale $\bowtie \in \{<, >, =, \le, \ge\}$:
+    \[ [\![ e_1 \bowtie e_2 ]\!]_b m = [\![ e_1 ]\!]_e m \bowtie [\![ e_2 ]\!]_e m \]
+\end{itemize}
+
+\paragraph{Semantica degli statement (comandi)}
+La semantica dei comandi definisce come uno stato di memoria viene trasformato.
+
+\begin{itemize}
+    \item \textbf{Skip (Comando vuoto)}: Non altera lo stato della memoria.
+    \[ [\![ \text{skip} ]\!] m = m \]
+    
+    \item \textbf{Assegnamento}: Aggiorna lo stato $m$ associando alla variabile $x$ il valore calcolato dell'espressione $e$.
+    \[ [\![ x := e ]\!] m = m [ x \leftarrow [\![ e ]\!]_e m ] \]
+    Dove la notazione $m[x \leftarrow v]$ indica una funzione che restituisce $v$ se l'input è $x$, altrimenti si comporta come $m$.
+    
+    \item \textbf{Sequenza}: È la composizione funzionale delle semantiche dei singoli statement.
+    \[ [\![ s_1 ; s_2 ]\!] m = [\![ s_2 ]\!] ( [\![ s_1 ]\!] m ) \]
+    
+    \item \textbf{Condizionale (if-then-else)}: Sceglie quale funzione applicare in base alla valutazione della guardia $b$.
+    \[
+    [\![ \text{if } b \text{ then } s_1 \text{ else } s_2 ]\!] m = \begin{cases}
+    [\![ s_1 ]\!] m & \text{se } [\![ b ]\!]_b m = tt \\
+    [\![ s_2 ]\!] m & \text{altrimenti}
+    \end{cases}
+    \]
+    
+    \item \textbf{Ciclo (while)}: È definito ricorsivamente. Se la guardia è vera, si esegue il corpo e si rivaluta il ciclo nel nuovo stato; se è falsa, lo stato rimane invariato.
+    \[
+    [\![ \text{while } b \text{ do } s ]\!] m = \begin{cases}
+    [\![ \text{while } b \text{ do } s ]\!] ( [\![ s ]\!] m ) & \text{se } [\![ b ]\!]_b m = tt \\
+    m & \text{altrimenti}
+    \end{cases}
+    \]
+\end{itemize}
 
 \subsection{Semantica delle tracce}\label{subsec:trace_semantics}
 
