@@ -7,7 +7,7 @@ $[\![P]\!]$, e una proprietà target $Q$ che si vuole verificare.
 L'obiettivo ideale sarebbe verificare se $[\![P]\!] \subseteq Q$.
 Tuttavia, a causa del Teorema di Rice e dell'indecidibilità dell'arresto,
 questa inclusione è in generale indecidibile.
-Per questo motivo si ricorre ad un'approssimazione ${[\![P]\!]}^{\#}$ di $[\![P]\!]$.
+Per questo motivo si ricorre a un'approssimazione ${[\![P]\!]}^{\#}$ di $[\![P]\!]$.
 
 \begin{definizione}{Approssimazione}{approximation}
 
@@ -28,7 +28,7 @@ ${[\![P]\!]}^{\#}$ della semantica concreta $[\![P]\!]$ tale che rispetti due pr
 La condizione di soundness è cruciale (\Cref{def:approximation}).
 Se si riesce a dimostrare che l'approssimazione è sicura
 (${[\![P]\!]}^{\#} \subseteq Q$), allora per la proprietà di transitività
-dell'inclusione, è concludere che anche il programma reale è
+dell'inclusione, è possibile concludere che anche il programma reale è
 sicuro ($[\![P]\!] \subseteq Q$).
 
 Tuttavia, se l'approssimazione non soddisfa la proprietà
@@ -319,7 +319,7 @@ In questa fase, invece di considerare l'intera storia temporale
 continua $x(t)$ di un'esecuzione, viene considerato il comportamento del
 programma in singoli passi di transizione.
 Questo approccio definisce le regole operazionali (semantica operazionale) che
-permettono di passare da uno stato corrente al successivo, creando un
+permettono di passare da uno stato corrente al successivo, creando una
 traiettoria discreta di stati.
 
 \begin{figure}[H]
@@ -429,7 +429,7 @@ L'analisi statica procede quindi:
     \item Utilizzando la collecting semantics sui punti di programma.
 \end{itemize}
 
-Così facendo però rimane ancora il problema della undecidibilità, poiché gli
+Così facendo però rimane ancora il problema della indecidibilità, poiché gli
 insiemi di stati possono essere infiniti e non calcolabili.
 Infatti è necessario approssimare ulteriormente questi insiemi.
 

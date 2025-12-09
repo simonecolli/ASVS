@@ -19,7 +19,7 @@ Si consideri il seguente programma:
 La sua rappresentazione come CFG è la seguente:
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{images/th_04/01.png}
+  \includegraphics[width=0.4\textwidth]{images/th_04/01.png}
   \caption{L'immagine illustra il CFG del programma di esempio.}
   \label{fig:th_04_01}
 \end{figure}
@@ -164,7 +164,6 @@ un'espressione.
 
 \paragraph{Equazioni di flusso}
 
-
 Per ogni blocco $i \in nodes(G)$ del CFG, si definisce lo stato entrante
 $entry(i)$ e lo stato uscente $exit(i)$.
 
@@ -244,8 +243,7 @@ Come accennato nella nota (\Cref{nt:types_of_df}), le analisi di dataflow
 possono essere classificate secondo vari criteri.
 In aggiunta all'analisi delle available expressions, esistono numerose altre
 analisi di dataflow utilizzate per diversi scopi nell'ottimizzazione del
-codice. Alcuni esempi di altre analisi viste nel corso di linguaggi interpreti e
-compilatori di dataflow includono:
+codice. Alcuni esempi di altre analisi viste nel corso di Linguaggi e Compilatori di dataflow includono:
 \begin{itemize}
     \item \textbf{Live variables}
     \item \textbf{Reaching definitions}
@@ -331,7 +329,7 @@ Non tutte le analisi statiche possono essere modellate come analisi di dataflow.
 \subsection{Analisi distributive}
 
 Le analisi dataflow classiche appartengono alla categoria delle analisi
-distributive
+distributive.
 Questa proprietà matematica è fondamentale perché garantisce che l'analisi
 possa essere risolta con algoritmi standard efficienti, ma ne limita anche la
 potenza espressiva.
@@ -450,7 +448,7 @@ Dal CFG sopra è possibile costruire due insiemi di stati:
     \item Stato $s_1$ (nodo destro): $ \{ y \mapsto 0, z \mapsto 0 \} $
 \end{itemize}
 
-La funzione di trasferimeno al join point (l'istruzione $x := y + z$) calcola il
+La funzione di trasferimento al join point (l'istruzione $x := y + z$) calcola il
 nuovo stato:
 \[
 f(s_{in}) = f(s_0 \sqcup s_1)
@@ -458,7 +456,7 @@ f(s_{in}) = f(s_0 \sqcup s_1)
 dove $\sqcup$ è l'operatore di join del reticolo CP.
 
 Per verificare se la constant propagation è distributiva, è necessario calcolare
-$f(s_0 \sqcup s_1)$ e confrontarlo con $f(s_0) \sqcup f(s_1)$.:
+$f(s_0 \sqcup s_1)$ e confrontarlo con $f(s_0) \sqcup f(s_1)$:
  
 
 Prima di eseguire l'istruzione, l'analisi unisce le informazioni provenienti

@@ -119,7 +119,7 @@ Per verificare se $\supseteq$ è un ordine parziale su $\wp(X)$,
 \end{itemize}
 
 Poiché tutte e tre le proprietà sono soddisfatte, è possibile concludere che
-l'inclusione inversa $\supseteq$ è un ordine parziale su il powerset
+l'inclusione inversa $\supseteq$ è un ordine parziale sul powerset
 $\wp(X)$.
 
 \end{esercizio}
@@ -190,11 +190,11 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 Dato un poset $\langle X, \sqsubseteq \rangle$ e un sottoinsieme $Y \subseteq X$
 è possibile dire che:
 \begin{enumerate}
-    \item $y \in X$ è un lowerbound di $Y$ se $\forall y' \in Y, y \sqsubseteq y'$,
+    \item $y \in X$ è un lower bound di $Y$ se $\forall y' \in Y, y \sqsubseteq y'$,
     ovvero se ogni elemento dell'insieme $Y$ è maggiore o uguale a $y$.
-    \item $y$ è il lowerbound più grande tra tutti i lowerbound di $Y$, ovvero
+    \item $y$ è il lower bound più grande tra tutti i lower bound di $Y$, ovvero
     $\forall y' \in LB(Y). y' \sqsubseteq y$, dove $LB(Y)$ è l'insieme di
-    tutti i lowerbound di $Y$.
+    tutti i lower bound di $Y$.
 \end{enumerate}
 
 \end{definizione}
@@ -216,7 +216,7 @@ $S_1 \subseteq L$ e $S_2 \subseteq L$.\\
 \\
 Punto 2:\\
 Sia $U$ un qualsiasi insieme tale che $S_1 \subseteq U$ e $S_2 \subseteq U$.
-Allora $U$ deve per contenere gli elementi di $S_1$ e $S_2$ deve essere proprio
+Allora, affinché $U$ contenga gli elementi di $S_1$ e $S_2$, deve valere
 $(S_1 \cup S_2) \subseteq U$.\\
 \\
 \textbf{Soluzione esercizio 2}\\
@@ -248,7 +248,7 @@ Dato un poset $\langle X, \sqsubseteq \rangle$ è possibile definire:
 \begin{itemize}
     \item $\sqcup $ come il lub su $X$.
     \item $\sqcap $ come il glb su $X$.
-    \item se $\sqcup $ e $\sqcap $ esistono sono unici.
+    \item se $\sqcup $ e $\sqcap $ esistono, sono unici.
     \item $\sqcup X$ esiste se e solo se $X$ ha un elemento $\top$ ($\sqcup X = \top$).
     \item $\sqcap X$ esiste se e solo se $X$ ha un elemento $\bot$ ($\sqcap X = \bot$).
 \end{itemize}
@@ -425,7 +425,7 @@ Un reticolo completo possiede le seguenti proprietà:
 \subsection{Relations}
 
 \begin{definizione}{Prodotto cartesiano}{cartesian_product}
-Dati due insiemi(\Cref{def:set}) $X$ e $Y$, il loro prodotto cartesiano $X \times Y$ è
+Dati due insiemi (\Cref{def:set}) $X$ e $Y$, il loro prodotto cartesiano $X \times Y$ è
 l'insieme di tutte le possibili coppie ordinate $(x, y)$ dove il primo
 elemento appartiene a $X$ e il secondo a $Y$ .
 \[
@@ -442,7 +442,7 @@ R \subseteq X \times Y
 \end{definizione}
 
 \begin{nota}{Notazione per le relazioni}{nota:relation_notation}
-Dato una relazione $R \subseteq X \times Y$, è possibile indicare che
+Data una relazione $R \subseteq X \times Y$, è possibile indicare che
 un elemento $x \in X$ è in relazione con un elemento $y \in Y$ tramite due
 notazioni:
 \begin{itemize}
@@ -463,7 +463,7 @@ proprietà di riflessività, anti-simmetria e transitività (\Cref{def:partial_o
 
 \subsection{Functions (or maps)}
 
-Le funzioni (functions), sono un tipo particolare di relazione, e sono
+Le funzioni (functions) sono un tipo particolare di relazione, e sono
 fondamentali per riuscire a modellare gli stati di un programma.
 
 \begin{definizione}{Funzione}{function}
@@ -516,7 +516,7 @@ e una funzione $f: X \to Y$, è possibile dire che:
 \begin{itemize}
     \item La funzione $f$ è monotona se $x_1 \sqsubseteq_X x_2 \Rightarrow f(x_1) \sqsubseteq_Y f(x_2)$.
     \item La funzione $f$ è un embedding ordinato se $x_1 \sqsubseteq_X x_2 \iff f(x_1) \sqsubseteq_Y f(x_2)$.
-    \item La funzione $f$ è un isomorfa se è un embedding ordinato ed è
+    \item La funzione $f$ è isomorfa se è un embedding ordinato ed è
     suriettiva, ovvero: $\forall y \in Y, \exists x \in X . f(x) = y$.
 \end{itemize}
 \end{definizione}
@@ -577,8 +577,7 @@ Una funzione che preserva i join o i meet è monotona, ma una funzione che
 
 \subsection{Chains}
 \begin{definizione}{Catena}{chain}
-Dato un poset $\langle X, \sqsubseteq \rangle$, una catena (chain) $S$ se
-tutti gli elementi contenuti sono completamente ordinati, ovvero:
+Dato un poset $\langle X, \sqsubseteq \rangle$, un sottoinsieme $S \subseteq X$ è una catena (chain) se tutti gli elementi in esso contenuti sono completamente ordinati, ovvero:
 \[
 \forall x,y \in S . x \sqsubseteq y \vee y \sqsubseteq x
 \]
@@ -625,18 +624,19 @@ Questo significa che, dopo un certo indice $k$, tutti gli elementi successivi
 sono uguali a $l_k$ (il punto fisso della sequenza).
 \end{definizione}
 
-\begin{esempio}{Esempio di catena ascendente infinita non è strettamente crescente}{}
-Un esempio di catena ascendente infinita non strettamente crescente è la seguente:
+\begin{esempio}{Esempio di catena ascendente che si stabilizza}{}
+Una catena ascendente infinita non strettamente crescente è una catena che si stabilizza.
+Questo concetto è descritto dalla seguente formula:
 \[
  \exists k \ge 0 . \forall j \ge k . l_k = l_j
 \]
-Perché dopo un certo numero di passi $k$, tutti gli elementi successivi
+Questo avviene perché dopo un certo numero di passi $k$, tutti gli elementi successivi
 della catena sono uguali a $l_k$. Ovvero la catena si stabilizza.
 \end{esempio}
 
 \subsection{Mappe continue}
 
-\begin{definizione}{Mappa continua}{def:continuous_map}
+\begin{definizione}{Mappa continua}{continuous_map}
 
 Dati due reticoli (o poset) $\langle X, \sqsubseteq_X, \sqcup_X, \sqcap_X \rangle$ e
 $\langle Y, \sqsubseteq_Y, \sqcup_Y, \sqcap_Y \rangle$ e una funzione
@@ -650,7 +650,7 @@ le seguenti condizioni:
 
 \end{definizione}
 
-\begin{nota}{Utilità delle mappe continue}{nota:continuous_map_usefulness}
+\begin{nota}{Utilità delle mappe continue}{continuous_map_usefulness}
 Le mappe continue sono fondamentali nell'analisi statica perché permettono di
 applicare il Teorema di Kleene per calcolare i punti fissi (fixpoints)
 tramite iterazione.
@@ -714,7 +714,7 @@ La scelta del teorema dipende dalle proprietà della funzione $f$
 
 \begin{teorema}{Teorema di Knaster-Tarski}{knaster_tarski}
 
-    Sia $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ un reticolo e sia
+    Sia $\langle X, \sqsubseteq, \sqcup, \sqcap \rangle$ un reticolo completo e sia
 $f: X \to X$ una funzione monotona.
 Allora:
 \begin{enumerate}
@@ -737,7 +737,7 @@ Allora:
 
 \begin{teorema}{Teorema di Kleene}{kleene}
 Sia $\langle X, \sqsubseteq, \bot, \top, \sqcup, \sqcap \rangle$ un reticolo
-completo e sia $f: X \to X$ una funzione continua (\Cref{def:monotonicity_embedding_isomorphism}).
+completo e sia $f: X \to X$ una funzione continua (\Cref{def:continuous_map}).
 Allora $f$ ha un least fixpoint che può essere calcolato costruttivamente
 come il limite della catena ascendente che parte dal bottom ($\bot$):
 \[ lfp(f) = \bigsqcup_{n \ge 0} f^n(\bot) \]
